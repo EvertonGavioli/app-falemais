@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Container } from './styles';
 
-export default function CalculadoraFaleMais() {
+export default function Banner() {
   return (
     <Container>
-      <h1>Calculadora Fale Mais</h1>
+      <h1>Faça ligações ...</h1>
     </Container>
   );
 }

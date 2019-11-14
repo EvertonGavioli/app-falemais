@@ -1,13 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-import logo from '~/assets/images/logo.png';
-
-import { Container } from './styles';
+import { Container, Content, Logo } from './styles';
 
 export default function Header() {
   return (
     <Container>
-      <img src={logo} alt="Fale Mais" />
+      <Content>
+        <Logo>
+          <strong>FL</strong>
+        </Logo>
+        <Link to="/">Fale Mais</Link>
+      </Content>
     </Container>
   );
 }

@@ -21,7 +21,12 @@ export default createGlobalStyle`
   }
 
   body {
-    background: url(${background});
+    background-image: url(${background});
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+
     -webkit-font-smoothing: antialiased;
   }
 
