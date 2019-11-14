@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken } from 'polished';
 import Select from 'react-select';
 
 export const Container = styled.div`
@@ -20,7 +21,9 @@ export const Content = styled.div`
 
 export const CalculatorHeader = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.4fr 1fr 1fr;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr)) minmax(0, 1.5fr)
+    repeat(2, minmax(0, 1.3fr));
   grid-gap: 20px;
   text-align: center;
   align-items: center;
@@ -34,7 +37,9 @@ export const CalculatorHeader = styled.div`
 
 export const CalculatorFields = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1.4fr 1fr 1fr;
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr)) minmax(0, 1.5fr)
+    repeat(2, minmax(0, 1.3fr));
   grid-gap: 10px;
   text-align: center;
 
@@ -65,8 +70,22 @@ export const Input = styled.input.attrs({
   font-size: 16px;
   color: #450057;
 
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: ${darken(0.1, '#ccc')};
+  }
+
   &:focus {
     border-color: #2684ff;
     box-shadow: 0 0 0 1px #2684ff;
   }
+`;
+
+export const Result = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
 `;

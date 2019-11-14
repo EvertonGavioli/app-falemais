@@ -9,6 +9,7 @@ import {
   CalculatorFields,
   DropDown,
   Input,
+  Result,
 } from './styles';
 
 export default function Calculator() {
@@ -39,8 +40,8 @@ export default function Calculator() {
           <DropDown options={localeOptions} />
           <Input />
           <DropDown options={plansOptions} />
-          <h1>5</h1>
-          <h1>6</h1>
+          <Result>R$100.000,00</Result>
+          <Result>R$100.000,00</Result>
         </CalculatorFields>
       </Content>
     </Container>
