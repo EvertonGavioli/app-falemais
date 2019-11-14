@@ -8,7 +8,7 @@ export default function Header() {
     <Container>
       <Content>
         <Logo>
-          <strong>FL</strong>
+          <strong>FLM</strong>
         </Logo>
         <Link to="/">Fale Mais</Link>
       </Content>
