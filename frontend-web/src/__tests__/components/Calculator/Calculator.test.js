@@ -1,11 +1,19 @@
+import React from 'react';
+import { render, cleanup } from '@testing-library/react';
+
 import { formatPrice } from '~/utils/format';
+
 import {
   getTariff,
   calculatePriceWithPlan,
   calculatePriceWithoutPlan,
-} from '~/components/Calculator/calculatorUtils';
+} from '~/domain/Calculator';
 
-describe('Testes unitários do componente', () => {
+import Calculator from '~/components/Calculator';
+
+afterEach(cleanup);
+
+describe('Testes unitários de funções usadas no componente', () => {
   it('Deve retornar a tarifa correta de acordo com a origem e destino', () => {
     expect(getTariff('011', '016')).toBe(1.9);
     expect(getTariff('016', '011')).toBe(2.9);
@@ -42,17 +50,28 @@ describe('Testes unitários do componente', () => {
     expect(withoutPlan).toBe('380.00');
   });
 
-  it('Deve retornar undefined quando tarifa não existe', () => {
+  it('Deve retornar undefined quando a tarifa não existe', () => {
     const tariff = getTariff('018', '017');
     expect(tariff).toBeUndefined();
   });
 });
 
-describe('Testes unitários funções utils', () => {
+describe('Testes unitários das funções utils', () => {
   it('Deve retornar um número no formato de moeda em R$', () => {
     const priceFormatted = formatPrice(10000).replace(/\s/g, '');
     const priceExpected = 'R$10.000,00';
 
     expect(priceFormatted).toBe(priceExpected);
+  });
+});
+
+describe('Testes do Componente Calculador de Planos', () => {
+  it('Deve conter o elementos necessários para realizar o calculo', () => {
+    const { container } = render(<Calculator />);
+
+    expect(container.querySelector('#dropdown-origin')).toBeTruthy();
+    expect(container.querySelector('#dropdown-destiny')).toBeTruthy();
+    expect(container.querySelector('#input-minutes')).toBeTruthy();
+    expect(container.querySelector('#dropdown-plans')).toBeTruthy();
   });
 });

@@ -7,7 +7,7 @@ import {
   getTariff,
   calculatePriceWithPlan,
   calculatePriceWithoutPlan,
-} from './calculatorUtils';
+} from '~/domain/Calculator';
 
 import {
   Container,
@@ -27,7 +27,7 @@ export default function Calculator() {
   const [minutes, setMinutes] = useState(0);
   const [plan, setPlan] = useState(0);
 
-  const formattedPrices = useMemo(() => {
+  const calculatedPrices = useMemo(() => {
     if (origin && destiny && minutes && plan) {
       const tariff = getTariff(origin, destiny);
 
@@ -79,18 +79,27 @@ export default function Calculator() {
           <DropDown
             options={localeOptions}
             onChange={e => setOrigin(e.value)}
+            id="dropdown-origin"
           />
           <DropDown
             options={localeOptions}
             onChange={e => setDestiny(e.value)}
+            id="dropdown-destiny"
           />
-          <Input onInput={e => handleChangeMinutes(e.target)} />
-          <DropDown options={plansOptions} onChange={e => setPlan(e.value)} />
+          <Input
+            onInput={e => handleChangeMinutes(e.target)}
+            id="input-minutes"
+          />
+          <DropDown
+            options={plansOptions}
+            onChange={e => setPlan(e.value)}
+            id="dropdown-plans"
+          />
           <Result>
-            {formattedPrices.withPlan ? formattedPrices.withPlan : '-'}
+            {calculatedPrices.withPlan ? calculatedPrices.withPlan : '-'}
           </Result>
           <Result>
-            {formattedPrices.withoutPlan ? formattedPrices.withoutPlan : '-'}
+            {calculatedPrices.withoutPlan ? calculatedPrices.withoutPlan : '-'}
           </Result>
         </CalculatorFields>
       </Content>
