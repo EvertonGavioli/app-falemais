@@ -49,16 +49,16 @@ export const CalculatorFields = styled.div`
   padding: 10px 0px;
 `;
 
-export const DropDown = styled(Select).attrs(props => ({
+export const DropDown = styled(Select).attrs({
   placeholder: 'Selec...',
-}))`
+})`
   font-size: 16px;
 `;
 
 export const Input = styled.input.attrs({
   type: 'number',
   min: '1',
-  max: '9999',
+  max: '99999',
   step: '1',
   placeholder: '20',
 })`
