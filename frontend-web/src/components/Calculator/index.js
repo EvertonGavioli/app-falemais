@@ -1,10 +1,12 @@
 import React, { useState, useMemo } from 'react';
+import { formatPrice } from '~/utils/format';
 
 import {
   localeOptions,
   plansOptions,
   getTariff,
-  calculatePrice,
+  calculatePriceWithPlan,
+  calculatePriceWithoutPlan,
 } from './calculatorUtils';
 
 import {
@@ -25,17 +27,26 @@ export default function Calculator() {
   const [minutes, setMinutes] = useState(0);
   const [plan, setPlan] = useState(0);
 
-  const prices = useMemo(() => {
+  const formattedPrices = useMemo(() => {
     if (origin && destiny && minutes && plan) {
       const tariff = getTariff(origin, destiny);
 
       if (tariff) {
-        const calculatedPrices = calculatePrice(
+        const priceWithPlan = calculatePriceWithPlan(
           Number(tariff),
           Number(minutes),
           Number(plan)
         );
-        return calculatedPrices;
+
+        const priceWithoutPlan = calculatePriceWithoutPlan(
+          Number(tariff),
+          Number(minutes)
+        );
+
+        return {
+          withPlan: formatPrice(priceWithPlan),
+          withoutPlan: formatPrice(priceWithoutPlan),
+        };
       }
     }
     return {};
@@ -75,8 +86,12 @@ export default function Calculator() {
           />
           <Input onInput={e => handleChangeMinutes(e.target)} />
           <DropDown options={plansOptions} onChange={e => setPlan(e.value)} />
-          <Result>{prices.withPlan ? prices.withPlan : '-'}</Result>
-          <Result>{prices.withoutPlan ? prices.withoutPlan : '-'}</Result>
+          <Result>
+            {formattedPrices.withPlan ? formattedPrices.withPlan : '-'}
+          </Result>
+          <Result>
+            {formattedPrices.withoutPlan ? formattedPrices.withoutPlan : '-'}
+          </Result>
         </CalculatorFields>
       </Content>
     </Container>

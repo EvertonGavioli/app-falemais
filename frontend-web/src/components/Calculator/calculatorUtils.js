@@ -1,5 +1,4 @@
 import data from '~/data/server';
-import { formatPrice } from '~/utils/format';
 
 export const localeOptions = data.localesDDD.map(locale => ({
   value: locale,
@@ -23,21 +22,21 @@ export function getTariff(origin, destiny) {
   return undefined;
 }
 
-export function calculatePrice(tariff, minutes, planMinutes) {
+export function calculatePriceWithPlan(tariff, minutes, planMinutes) {
   const INCREASE = 1.1;
-
   let withPlan = 0;
-  let withoutPlan = 0;
 
   const overMinutes = minutes - planMinutes;
 
   if (overMinutes > 0) {
     withPlan = overMinutes * tariff * INCREASE;
   }
-  withoutPlan = minutes * tariff;
 
-  return {
-    withPlan: formatPrice(withPlan),
-    withoutPlan: formatPrice(withoutPlan),
-  };
+  return withPlan.toFixed(2);
+}
+
+export function calculatePriceWithoutPlan(tariff, minutes) {
+  const withoutPlan = minutes * tariff;
+
+  return withoutPlan.toFixed(2);
 }
