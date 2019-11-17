@@ -70,6 +70,7 @@ export default function Calculator() {
         <FieldContainer>
           <Text>Origem:</Text>
           <StyledPicker
+            testID="picker-origin"
             mode="dropdown"
             selectedValue={origin}
             onValueChange={(itemValue, itemIndex) => {
@@ -88,6 +89,7 @@ export default function Calculator() {
         <FieldContainer>
           <Text>Destino:</Text>
           <StyledPicker
+            testID="picker-destiny"
             mode="dropdown"
             selectedValue={destiny}
             onValueChange={(itemValue, itemIndex) => {
@@ -106,6 +108,7 @@ export default function Calculator() {
         <FieldContainer>
           <Text>Minutos:</Text>
           <StyledInput
+            testID="input-minutes"
             keyboardType="numeric"
             maxLength={5}
             onChangeText={text => handleChangeMinutes(text)}
@@ -116,6 +119,7 @@ export default function Calculator() {
         <FieldContainer>
           <Text>Plano FaleMais:</Text>
           <StyledPicker
+            testID="picker-plans"
             mode="dropdown"
             selectedValue={plan}
             onValueChange={(itemValue, itemIndex) => {
@@ -133,12 +137,12 @@ export default function Calculator() {
 
         <ResultsContainer>
           <TitleWithPlan>Com FaleMais</TitleWithPlan>
-          <PriceWithPlan>
+          <PriceWithPlan testID="price-with-plan">
             {calculatedPrices.withPlan ? calculatedPrices.withPlan : '-'}
           </PriceWithPlan>
 
           <TitleWithoutPlan>Sem FaleMais</TitleWithoutPlan>
-          <PriceWithoutPlan>
+          <PriceWithoutPlan testID="price-without-plan">
             {calculatedPrices.withoutPlan ? calculatedPrices.withoutPlan : '-'}
           </PriceWithoutPlan>
         </ResultsContainer>
