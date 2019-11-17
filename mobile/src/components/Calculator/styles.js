@@ -52,25 +52,25 @@ export const ResultsContainer = styled.View`
 export const TitleWithPlan = styled.Text`
   font-size: 22px;
   font-weight: bold;
-  color: #228b22;
+  color: ${color.primary};
 `;
 
 export const PriceWithPlan = styled.Text`
   font-size: 32px;
   font-weight: bold;
-  color: ${color.primary};
+  color: ${color.secondary};
 `;
 
 export const TitleWithoutPlan = styled.Text`
   text-align: right;
   font-size: 22px;
   font-weight: bold;
-  color: #dc143c;
+  color: ${color.primary};
 `;
 
 export const PriceWithoutPlan = styled.Text`
   text-align: right;
   font-size: 32px;
   font-weight: bold;
-  color: ${color.primary};
+  color: ${color.secondary};
 `;
