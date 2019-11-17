@@ -41,15 +41,21 @@ export const StyledInput = styled.TextInput`
   font-size: 16px;
 `;
 
+export const ResultsContainer = styled.View`
+  border: 1px solid ${color.secondary};
+  border-radius: 8px;
+  margin: 10px 20px 20px;
+  padding: 10px;
+  background: #f6f6f6;
+`;
+
 export const TitleWithPlan = styled.Text`
-  margin: 20px 20px 0px;
   font-size: 22px;
   font-weight: bold;
   color: #228b22;
 `;
 
 export const PriceWithPlan = styled.Text`
-  margin-left: 40px;
   font-size: 32px;
   font-weight: bold;
   color: ${color.primary};
@@ -57,7 +63,6 @@ export const PriceWithPlan = styled.Text`
 
 export const TitleWithoutPlan = styled.Text`
   text-align: right;
-  margin: 10px 20px 0px;
   font-size: 22px;
   font-weight: bold;
   color: #dc143c;
@@ -65,8 +70,6 @@ export const TitleWithoutPlan = styled.Text`
 
 export const PriceWithoutPlan = styled.Text`
   text-align: right;
-  margin-right: 40px;
-  margin-bottom: 40px;
   font-size: 32px;
   font-weight: bold;
   color: ${color.primary};

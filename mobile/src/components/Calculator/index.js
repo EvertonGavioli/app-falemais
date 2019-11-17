@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {Text, ScrollView} from 'react-native';
 
 import {formatPrice} from '../../utils/format';
@@ -17,6 +17,7 @@ import {
   FieldContainer,
   StyledPicker,
   StyledInput,
+  ResultsContainer,
   TitleWithPlan,
   PriceWithPlan,
   TitleWithoutPlan,
@@ -26,7 +27,7 @@ import {
 export default function Calculator() {
   const [origin, setOrigin] = useState('');
   const [destiny, setDestiny] = useState('');
-  const [minutes, setMinutes] = useState('20');
+  const [minutes, setMinutes] = useState('');
   const [plan, setPlan] = useState(0);
 
   const calculatedPrices = useMemo(() => {
@@ -53,6 +54,12 @@ export default function Calculator() {
     }
     return {};
   }, [origin, destiny, minutes, plan]);
+
+  useEffect(() => {
+    setOrigin(localeOptions[0].value);
+    setDestiny(localeOptions[1].value);
+    setPlan(plansOptions[0].value);
+  }, []);
 
   function handleChangeMinutes(text) {
     setMinutes(String(text).replace(/[^0-9]/g, ''));
@@ -127,15 +134,17 @@ export default function Calculator() {
           </StyledPicker>
         </FieldContainer>
 
-        <TitleWithPlan>Com FaleMais</TitleWithPlan>
-        <PriceWithPlan>
-          {calculatedPrices.withPlan ? calculatedPrices.withPlan : '-'}
-        </PriceWithPlan>
+        <ResultsContainer>
+          <TitleWithPlan>Com FaleMais</TitleWithPlan>
+          <PriceWithPlan>
+            {calculatedPrices.withPlan ? calculatedPrices.withPlan : '-'}
+          </PriceWithPlan>
 
-        <TitleWithoutPlan>Sem FaleMais</TitleWithoutPlan>
-        <PriceWithoutPlan>
-          {calculatedPrices.withoutPlan ? calculatedPrices.withoutPlan : '-'}
-        </PriceWithoutPlan>
+          <TitleWithoutPlan>Sem FaleMais</TitleWithoutPlan>
+          <PriceWithoutPlan>
+            {calculatedPrices.withoutPlan ? calculatedPrices.withoutPlan : '-'}
+          </PriceWithoutPlan>
+        </ResultsContainer>
       </ScrollView>
     </Container>
   );
