@@ -3,13 +3,10 @@ import {Text, ScrollView} from 'react-native';
 
 import {formatPrice} from '../../utils/format';
 
-import {
-  localeOptions,
-  plansOptions,
-  getTariff,
-  calculatePriceWithPlan,
-  calculatePriceWithoutPlan,
-} from '../../domain/Calculator';
+import Tariff from '../../services/Calculator/Tariff';
+import Locale from '../../services/Calculator/Locale';
+import Plan from '../../services/Calculator/Plan';
+import CalculatePrice from '../../services/Calculator/CalculatePrice';
 
 import {
   Container,
@@ -32,16 +29,16 @@ export default function Calculator() {
 
   const calculatedPrices = useMemo(() => {
     if (origin && destiny && minutes && plan) {
-      const tariff = getTariff(origin, destiny);
+      const tariff = Tariff.getTariff(origin, destiny);
 
       if (tariff) {
-        const priceWithPlan = calculatePriceWithPlan(
+        const priceWithPlan = CalculatePrice.calculatePriceWithPlan(
           Number(tariff),
           Number(minutes),
           Number(plan),
         );
 
-        const priceWithoutPlan = calculatePriceWithoutPlan(
+        const priceWithoutPlan = CalculatePrice.calculatePriceWithoutPlan(
           Number(tariff),
           Number(minutes),
         );
@@ -56,9 +53,9 @@ export default function Calculator() {
   }, [origin, destiny, minutes, plan]);
 
   useEffect(() => {
-    setOrigin(localeOptions[0].value);
-    setDestiny(localeOptions[1].value);
-    setPlan(plansOptions[0].value);
+    setOrigin(Locale.localeOptions()[0].value);
+    setDestiny(Locale.localeOptions()[1].value);
+    setPlan(Plan.plansOptions()[0].value);
   }, []);
 
   function handleChangeMinutes(text) {
@@ -78,7 +75,7 @@ export default function Calculator() {
             onValueChange={(itemValue, itemIndex) => {
               setOrigin(itemValue);
             }}>
-            {localeOptions.map(locale => (
+            {Locale.localeOptions().map(locale => (
               <StyledPicker.Item
                 key={String(locale.value)}
                 label={locale.label}
@@ -96,7 +93,7 @@ export default function Calculator() {
             onValueChange={(itemValue, itemIndex) => {
               setDestiny(itemValue);
             }}>
-            {localeOptions.map(locale => (
+            {Locale.localeOptions().map(locale => (
               <StyledPicker.Item
                 key={String(locale.value)}
                 label={locale.label}
@@ -124,7 +121,7 @@ export default function Calculator() {
             onValueChange={(itemValue, itemIndex) => {
               setPlan(itemValue);
             }}>
-            {plansOptions.map(planOption => (
+            {Plan.plansOptions().map(planOption => (
               <StyledPicker.Item
                 key={String(planOption.value)}
                 label={planOption.label}
