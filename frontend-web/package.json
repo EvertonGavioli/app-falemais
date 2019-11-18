@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu react-app-rewired test",
+    "test": "cross-env NODE_ICU_DATA=node_modules/full-icu react-app-rewired test --watchAll=false",
     "coverage": "cross-env NODE_ICU_DATA=node_modules/full-icu react-app-rewired test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
@@ -28,6 +28,9 @@
     "moduleNameMapper": {
       "^~/(.*)": "<rootDir>/src/$1"
     },
+    "testPathIgnorePatterns": [
+      "<rootDir>/src/__tests__/coverage/"
+    ],
     "collectCoverageFrom": [
       "!src/index.js"
     ],
