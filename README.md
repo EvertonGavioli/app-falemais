@@ -9,12 +9,15 @@
 
 Recomenda-se utilizar o gerenciador de pacotes [`yarn`](https://yarnpkg.com), para instalar as dependência de desenvolvimento do projeto.
 
-### Clone do repositório
+### Clone do repositório ou Arquivo ZIP 
 
 Clonar o repositório remoto para a máquina local
+
 ```sh
 git clone https://github.com/EvertonGavioli/vizir-desafio-falemais.git
 ```
+
+Ou extrair o arquivo zip para um diretório na máquina local
 
 # Aplicação WEB
 

@@ -32,7 +32,8 @@
       "<rootDir>/src/__tests__/coverage/"
     ],
     "collectCoverageFrom": [
-      "!src/index.js"
+      "!src/index.js",
+      "!src/__tests__/coverage/**/*.js"
     ],
     "coverageDirectory": "<rootDir>/src/__tests__/coverage"
   },
