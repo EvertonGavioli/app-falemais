@@ -1,5 +1,10 @@
 # Show me the code
 
+<h1 align="center">
+  <img alt="falemais-web" title="falemais-web" src=".github/falemais-web.png" height="300px" />
+  <img alt="falemais-mobile" title="falemais-mobile" src=".github/falemais-mobile.png" height="300px" />
+</h1>
+
 ## Instalação
 
 Recomenda-se utilizar o gerenciador de pacotes [`yarn`](https://yarnpkg.com), para instalar as dependência de desenvolvimento do projeto.

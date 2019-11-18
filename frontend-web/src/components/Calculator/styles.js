@@ -60,7 +60,7 @@ export const Input = styled.input.attrs({
   min: '1',
   max: '99999',
   step: '1',
-  placeholder: '20',
+  placeholder: '...',
 })`
   height: 38px;
   padding: 2px 8px;
