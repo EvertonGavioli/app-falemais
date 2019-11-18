@@ -1,5 +1,5 @@
-export default {
-  tariff: [
+const Tariff = {
+  listTariffs: [
     {
       origin: '011',
       destiny: '016',
@@ -31,19 +31,18 @@ export default {
       minute_price: 1.9,
     },
   ],
-  localesDDD: ['011', '016', '017', '018'],
-  plans: [
-    {
-      minutes: 30,
-      description: 'FaleMais 30',
-    },
-    {
-      minutes: 60,
-      description: 'FaleMais 60',
-    },
-    {
-      minutes: 120,
-      description: 'FaleMais 120',
-    },
-  ],
+
+  getTariff(origin, destiny) {
+    const tariff = this.listTariffs.find(
+      tff => tff.origin === origin && tff.destiny === destiny
+    );
+
+    if (tariff) {
+      return tariff.minute_price;
+    }
+
+    return undefined;
+  },
 };
+
+export default Tariff;

@@ -15,6 +15,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "cross-env NODE_ICU_DATA=node_modules/full-icu react-app-rewired test",
+    "coverage": "cross-env NODE_ICU_DATA=node_modules/full-icu react-app-rewired test --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -26,7 +27,11 @@
     ],
     "moduleNameMapper": {
       "^~/(.*)": "<rootDir>/src/$1"
-    }
+    },
+    "collectCoverageFrom": [
+      "!src/index.js"
+    ],
+    "coverageDirectory": "<rootDir>/src/__tests__/coverage"
   },
   "browserslist": {
     "production": [

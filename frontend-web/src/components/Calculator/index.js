@@ -1,13 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { formatPrice } from '~/utils/format';
 
-import {
-  localeOptions,
-  plansOptions,
-  getTariff,
-  calculatePriceWithPlan,
-  calculatePriceWithoutPlan,
-} from '~/domain/Calculator';
+import Tariff from '~/services/Calculator/Tariff';
+import Locale from '~/services/Calculator/Locale';
+import Plan from '~/services/Calculator/Plan';
+import CalculatePrice from '~/services/Calculator/CalculatePrice';
 
 import {
   Container,
@@ -29,16 +26,16 @@ export default function Calculator() {
 
   const calculatedPrices = useMemo(() => {
     if (origin && destiny && minutes && plan) {
-      const tariff = getTariff(origin, destiny);
+      const tariff = Tariff.getTariff(origin, destiny);
 
       if (tariff) {
-        const priceWithPlan = calculatePriceWithPlan(
+        const priceWithPlan = CalculatePrice.calculatePriceWithPlan(
           Number(tariff),
           Number(minutes),
           Number(plan)
         );
 
-        const priceWithoutPlan = calculatePriceWithoutPlan(
+        const priceWithoutPlan = CalculatePrice.calculatePriceWithoutPlan(
           Number(tariff),
           Number(minutes)
         );
@@ -76,29 +73,34 @@ export default function Calculator() {
           <strong>Sem FaleMais</strong>
         </CalculatorHeader>
         <CalculatorFields>
-          <DropDown
-            options={localeOptions}
-            onChange={e => setOrigin(e.value)}
-            id="dropdown-origin"
-          />
-          <DropDown
-            options={localeOptions}
-            onChange={e => setDestiny(e.value)}
-            id="dropdown-destiny"
-          />
-          <Input
-            onInput={e => handleChangeMinutes(e.target)}
-            id="input-minutes"
-          />
-          <DropDown
-            options={plansOptions}
-            onChange={e => setPlan(e.value)}
-            id="dropdown-plans"
-          />
-          <Result>
+          <div data-testid="dropdown-origin">
+            <DropDown
+              options={Locale.localeOptions()}
+              onChange={e => setOrigin(e.value)}
+            />
+          </div>
+          <div data-testid="dropdown-destiny">
+            <DropDown
+              options={Locale.localeOptions()}
+              onChange={e => setDestiny(e.value)}
+            />
+          </div>
+          <div>
+            <Input
+              data-testid="input-minutes"
+              onChange={e => handleChangeMinutes(e.target)}
+            />
+          </div>
+          <div data-testid="dropdown-plans">
+            <DropDown
+              options={Plan.plansOptions()}
+              onChange={e => setPlan(e.value)}
+            />
+          </div>
+          <Result data-testid="price-with-plan">
             {calculatedPrices.withPlan ? calculatedPrices.withPlan : '-'}
           </Result>
-          <Result>
+          <Result data-testid="price-without-plan">
             {calculatedPrices.withoutPlan ? calculatedPrices.withoutPlan : '-'}
           </Result>
         </CalculatorFields>
