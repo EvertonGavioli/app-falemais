@@ -27,6 +27,12 @@ export default function Calculator() {
   const [minutes, setMinutes] = useState('');
   const [plan, setPlan] = useState(0);
 
+  useEffect(() => {
+    setOrigin(Locale.localeOptions()[0].value);
+    setDestiny(Locale.localeOptions()[1].value);
+    setPlan(Plan.plansOptions()[0].value);
+  }, []);
+
   const calculatedPrices = useMemo(() => {
     if (origin && destiny && minutes && plan) {
       const tariff = Tariff.getTariff(origin, destiny);
@@ -47,16 +53,13 @@ export default function Calculator() {
           withPlan: formatPrice(priceWithPlan),
           withoutPlan: formatPrice(priceWithoutPlan),
         };
+      } else {
+        return {};
       }
+    } else {
+      return {};
     }
-    return {};
   }, [origin, destiny, minutes, plan]);
-
-  useEffect(() => {
-    setOrigin(Locale.localeOptions()[0].value);
-    setDestiny(Locale.localeOptions()[1].value);
-    setPlan(Plan.plansOptions()[0].value);
-  }, []);
 
   function handleChangeMinutes(text) {
     setMinutes(String(text).replace(/[^0-9]/g, ''));

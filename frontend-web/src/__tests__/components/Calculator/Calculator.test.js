@@ -51,4 +51,27 @@ describe('Testes do Componente Calculadora de Planos', () => {
     expect(getByText('R$ 0,00')).toBeTruthy();
     expect(getByText('R$ 38,00')).toBeTruthy();
   });
+
+  it('Deve retornar vazio quando tarifa não encontrada', () => {
+    const { getByTestId } = render(<Calculator />);
+
+    const origin = getByTestId('dropdown-origin').querySelector('input');
+    const destiny = getByTestId('dropdown-destiny').querySelector('input');
+    const minutes = getByTestId('input-minutes');
+    const plan = getByTestId('dropdown-plans').querySelector('input');
+
+    fireEvent.change(origin, { target: { value: '011' } });
+    fireEvent.keyDown(origin, { keyCode: 12, key: 'Enter' });
+
+    fireEvent.change(destiny, { target: { value: '011' } });
+    fireEvent.keyDown(destiny, { keyCode: 12, key: 'Enter' });
+
+    fireEvent.change(minutes, { target: { value: 20 } });
+
+    fireEvent.change(plan, { target: { value: 'FaleMais 30' } });
+    fireEvent.keyDown(plan, { keyCode: 12, key: 'Enter' });
+
+    expect(getByTestId('price-with-plan').textContent).toEqual('-');
+    expect(getByTestId('price-without-plan').textContent).toEqual('-');
+  });
 });

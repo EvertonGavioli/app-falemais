@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { formatPrice } from '~/utils/format';
 
 import Tariff from '~/services/Calculator/Tariff';
@@ -45,6 +45,7 @@ export default function Calculator() {
           withoutPlan: formatPrice(priceWithoutPlan),
         };
       }
+      return {};
     }
     return {};
   }, [origin, destiny, minutes, plan]);

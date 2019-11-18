@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "coverage": "jest --coverage --watchAll=false",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -39,11 +40,14 @@
       "**/__tests__/**/*.test.js"
     ],
     "collectCoverageFrom": [
-      "!src/services/api.js"
+      "<rootDir>/src/**/*.js"
     ],
     "coverageDirectory": "__tests__/coverage",
-    "moduleNameMapper": {
-      "^~/(.*)": "<rootDir>/src/$1"
-    }
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@?react-navigation)"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ]
   }
 }

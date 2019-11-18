@@ -1,7 +1,7 @@
-import CalculatePrice from '~/services/Calculator/CalculatePrice';
-import Locale from '~/services/Calculator/Locale';
-import Plan from '~/services/Calculator/Plan';
-import Tariff from '~/services/Calculator/Tariff';
+import CalculatePrice from '../../../src/services/Calculator/CalculatePrice';
+import Locale from '../../../src/services/Calculator/Locale';
+import Plan from '../../../src/services/Calculator/Plan';
+import Tariff from '../../../src/services/Calculator/Tariff';
 
 describe('Testes unitários de funções usadas no componente', () => {
   it('Deve retornar a tarifa correta de acordo com a origem e destino', () => {
